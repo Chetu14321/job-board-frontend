@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import JobList from "./components/JonList";
+import JobList from "./components/JobList";
 import JobDetails from "./components/JobDetails";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
@@ -9,9 +9,11 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <div className="container mt-4">
+
+      <div className="container-fluid mt-4">
         <div className="row">
-          <div className="col-md-8">
+          {/* Main Content */}
+          <div className="col-lg-8 col-md-12">
             <Routes>
               <Route path="/" element={<JobList />} />
               <Route path="/job/:id" element={<JobDetails />} />
@@ -19,11 +21,17 @@ function App() {
               <Route path="/locations" element={<h2>Locations Coming Soon</h2>} />
             </Routes>
           </div>
-          <Sidebar />
+
+          {/* Sidebar */}
+          <div className="col-lg-4 d-none d-lg-block">
+            <Sidebar />
+          </div>
         </div>
       </div>
-      <Footer/>
+
+      <Footer />
     </Router>
   );
 }
+
 export default App;
