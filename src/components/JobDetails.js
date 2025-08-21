@@ -1,0 +1,95 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import AdSlot from "./AdSlot";
+
+export default function JobDetails() {
+  const { id } = useParams();
+  const [job, setJob] = useState(null);
+  const [showFullDesc, setShowFullDesc] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`https://job-board-backend-o49r.onrender.com/api/jobs/${id}`)
+      .then((res) => setJob(res.data));
+  }, [id]);
+
+  if (!job)
+    return (
+      <div className="text-center py-5">
+        <div className="spinner-border text-primary" role="status"></div>
+        <p className="mt-3">Loading job details...</p>
+      </div>
+    );
+
+  const shortDescription =
+    job.description?.length > 400
+      ? job.description.substring(0, 400) + "..."
+      : job.description;
+
+  return (
+    <div className="py-5" style={{ backgroundColor: "#f4f6f9", minHeight: "100vh" }}>
+      <div className="container">
+        {/* Full Width Content */}
+        <div className="card shadow-sm border-0 rounded-4">
+          <div className="card-body p-5">
+            {/* Job Title & Company */}
+            <h1 className="fw-bold text-dark">{job.title}</h1>
+            <h4 className="text-muted mb-3">{job.company}</h4>
+
+            {/* Location + Remote */}
+            <p className="mb-3">
+              <span className="badge bg-primary">{job.location}</span>
+              {job.isWFH && (
+                <span className="badge bg-success ms-2">Remote</span>
+              )}
+            </p>
+
+            {/* Posted Date */}
+            <p className="text-secondary small mb-4">
+              📅 Posted on {new Date(job.postedAt).toLocaleDateString()}
+            </p>
+
+            {/* --- Ad block inside content --- */}
+            <div className="my-4 text-center">
+              <AdSlot slot="9876543210" />
+            </div>
+
+            {/* Job Description */}
+            <h5 className="fw-semibold mt-4 mb-3">Job Description</h5>
+            <p className="text-secondary" style={{ lineHeight: "1.7" }}>
+              {showFullDesc ? job.description : shortDescription}
+            </p>
+
+            {/* Show More / Less Button */}
+            {job.description?.length > 400 && (
+              <button
+                className="btn btn-link p-0 fw-semibold"
+                onClick={() => setShowFullDesc(!showFullDesc)}
+              >
+                {showFullDesc ? "Show Less ▲" : "Show More ▼"}
+              </button>
+            )}
+
+            {/* Apply Button */}
+            <div className="d-grid mt-5">
+              <a
+                href={job.applyUrl}
+                className="btn btn-primary btn-lg rounded-pill"
+                target="_blank"
+                rel="noreferrer"
+              >
+                🚀 Apply Now
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Ad (Full Width) */}
+        <div className="my-4 text-center">
+          <AdSlot slot="2468135790" />
+        </div>
+      </div>
+    </div>
+  );
+}
