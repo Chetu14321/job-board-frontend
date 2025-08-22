@@ -10,11 +10,12 @@ export default function JobList() {
 
   useEffect(() => {
     axios
-      .get("https://job-board-backend-o49r.onrender.com/api/jobs") // backend API
-      .then((res) => setJobs(res.data));
+      .get("https://job-board-backend-o49r.onrender.com/api/jobs") // ✅ Your backend API
+      .then((res) => setJobs(res.data))
+      .catch((err) => console.error("Error fetching jobs:", err));
   }, []);
 
-  // 🔹 Filter jobs based on search and role
+  // 🔹 Filter jobs based on search + role
   const filteredJobs = jobs.filter((job) => {
     const matchesSearch =
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -60,7 +61,7 @@ export default function JobList() {
               <option value="fullstack">Full Stack Developer</option>
               <option value="intern">Internship</option>
               <option value="designer">Designer</option>
-              <option value="mernstack">Mern Stack Developer</option>
+              <option value="mernstack">MERN Stack Developer</option>
             </select>
           </div>
         </div>
@@ -88,12 +89,6 @@ export default function JobList() {
                       )}
                     </p>
 
-                    {/* <p className="text-secondary small flex-grow-1">
-                      {job.description?.length > 100
-                        ? job.description.substring(0, 100) + "..."
-                        : job.description}
-                    </p> */}
-
                     <Link
                       to={`/job/${job._id}`}
                       className="btn btn-dark rounded-pill mt-auto"
@@ -105,15 +100,20 @@ export default function JobList() {
                     📅 {new Date(job.postedAt).toLocaleDateString()}
                   </div>
                 </div>
-
-                {/* 🔹 Ad block after every 3 jobs */}
-                {(i + 1) % 3 === 0 && (
-                  <div className="col-12 my-3">
-                    <AdSlot slot="1234567890" />
-                  </div>
-                )}
               </div>
             ))
+          )}
+        </div>
+
+        {/* 🔹 Insert Ads after every 3 jobs */}
+        <div className="row mt-4">
+          {filteredJobs.map((_, i) =>
+            (i + 1) % 3 === 0 ? (
+              <div key={`ad-${i}`} className="col-12 my-3">
+                {/* Banner Ad */}
+                <AdSlot height={90} width={728} />
+              </div>
+            ) : null
           )}
         </div>
       </div>
