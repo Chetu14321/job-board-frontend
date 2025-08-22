@@ -52,8 +52,8 @@ export default function JobDetails() {
 
             <div className="p-3 bg-light rounded shadow-sm">
                     <h5 className="fw-bold mb-3">Promotions</h5>
-                    <AdSlot height={90} width={728} /> {/* Leaderboard Banner */}
-                  </div>
+                    <AdSlot height={120} width={728} /> {/* Leaderboard Banner */}
+            </div>
 
             {/* Job Description */}
             <h5 className="fw-semibold mt-4 mb-3">Job Description</h5>
@@ -87,7 +87,7 @@ export default function JobDetails() {
 
        <div className="p-3 bg-light rounded shadow-sm">
                <h5 className="fw-bold mb-3">Promotions</h5>
-               <AdSlot height={90} width={728} /> {/* Leaderboard Banner */}
+               <AdSlot height={120} width={728} /> {/* Leaderboard Banner */}
              </div>
       </div>
     </div>
