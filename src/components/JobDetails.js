@@ -50,10 +50,10 @@ export default function JobDetails() {
               📅 Posted on {new Date(job.postedAt).toLocaleDateString()}
             </p>
 
-            {/* --- Ad block inside content --- */}
-            <div className="my-4 text-center">
-              <AdSlot slot="9876543210" />
-            </div>
+            <div className="p-3 bg-light rounded shadow-sm">
+                    <h5 className="fw-bold mb-3">Promotions</h5>
+                    <AdSlot height={90} width={728} /> {/* Leaderboard Banner */}
+                  </div>
 
             {/* Job Description */}
             <h5 className="fw-semibold mt-4 mb-3">Job Description</h5>
@@ -85,10 +85,10 @@ export default function JobDetails() {
           </div>
         </div>
 
-        {/* Bottom Ad (Full Width) */}
-        <div className="my-4 text-center">
-          <AdSlot slot="2468135790" />
-        </div>
+       <div className="p-3 bg-light rounded shadow-sm">
+               <h5 className="fw-bold mb-3">Promotions</h5>
+               <AdSlot height={90} width={728} /> {/* Leaderboard Banner */}
+             </div>
       </div>
     </div>
   );
