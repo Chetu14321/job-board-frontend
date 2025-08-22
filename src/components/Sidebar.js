@@ -3,13 +3,16 @@ import AdSlot from "./AdSlot";
 export default function Sidebar() {
   return (
     <aside className="col-md-4">
-      <div className="p-3 bg-light rounded">
-        <h5>Sponsored</h5>
-        <AdSlot slot="1111111111" />
+      {/* Sponsored Ad */}
+      <div className="p-3 bg-light rounded shadow-sm mb-3">
+        <h5 className="fw-bold mb-3">Sponsored</h5>
+        <AdSlot height={250} width={300} /> {/* Medium Rectangle */}
       </div>
-      <div className="p-3 bg-light rounded mt-3">
-        <h5>Promotions</h5>
-        <AdSlot slot="2222222222" />
+
+      {/* Promotions Ad */}
+      <div className="p-3 bg-light rounded shadow-sm">
+        <h5 className="fw-bold mb-3">Promotions</h5>
+        <AdSlot height={90} width={728} /> {/* Leaderboard Banner */}
       </div>
     </aside>
   );
